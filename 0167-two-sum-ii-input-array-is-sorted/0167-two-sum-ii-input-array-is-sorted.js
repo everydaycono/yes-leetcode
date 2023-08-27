@@ -4,20 +4,16 @@
  * @return {number[]}
  */
 var twoSum = function(numbers, target) {
-    let left = 0;
-    let right = numbers.length - 1;
+    const numToIndex = new Map();
     
-    while (left < right) {
-        const sum = numbers[left] + numbers[right];
-        
-        if (sum === target) {
-            return [left + 1, right + 1];
-        } else if (sum < target) {
-            left++;
-        } else {
-            right--;
+    for (let i = 0; i < numbers.length; i++) {
+        const complement = target - numbers[i];
+        if (numToIndex.has(complement)) {
+            return [numToIndex.get(complement) + 1, i + 1];
         }
+        numToIndex.set(numbers[i], i);
     }
+
 };
 
 
